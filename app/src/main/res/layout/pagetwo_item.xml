@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:backgroundTint="#fff"
+        android:layout_marginStart="@dimen/margin_4"
+        app:cardCornerRadius="@dimen/margin_4"
+        android:layout_marginEnd="@dimen/margin_4"
+        android:layout_marginTop="@dimen/margin_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:padding="@dimen/padding_4"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/workerName"
+                app:backgroundTint="@color/colorBlue"
+                android:textSize="@dimen/text_16"
+                android:padding="@dimen/padding_4"
+                app:useMaterialThemeColors="true"
+                android:text="@string/star_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/workerObjectName"
+                android:text="@string/select_object"
+                app:iconTint="@android:color/black"
+                android:textSize="@dimen/text_16"
+                app:iconGravity="end"
+                android:paddingStart="@dimen/padding_4"
+                android:gravity="center_vertical"
+                app:iconPadding="@dimen/padding_4"
+                app:icon="@drawable/ic_expand_more"
+                app:backgroundTint="#338C8787"
+                android:layout_marginEnd="@dimen/margin_4"
+                android:layout_marginStart="@dimen/margin_4"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RadioGroup
+                android:layout_marginTop="@dimen/margin_8"
+                android:padding="@dimen/padding_4"
+                android:id="@+id/radioGroup"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.example.tabel.utils.UncheckableRadioButton
+                    android:padding="@dimen/padding_4"
+                    android:layout_gravity="center"
+                    android:id="@+id/otprosilya"
+                    android:text="@string/otprosilya"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+                <com.example.tabel.utils.UncheckableRadioButton
+                    android:padding="@dimen/padding_4"
+                    android:id="@+id/boleli"
+                    android:text="@string/boleli"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+                <com.example.tabel.utils.UncheckableRadioButton
+                    android:padding="@dimen/padding_4"
+                    android:id="@+id/nе_prishel"
+                    android:text="@string/nе_prishel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/margin_8"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="#474343"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_16"
+                    android:text="@string/work_time"
+                    android:padding="@dimen/padding_4"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+
+                <FrameLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/deInkement"
+                        android:src="@drawable/ic_do_not_disturb"
+                        android:padding="@dimen/padding_4"
+                        android:layout_height="@dimen/ink_and_deink"
+                        android:layout_width="@dimen/ink_and_deink"
+                        />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:text="4"
+                        android:gravity="center"
+                        android:textSize="@dimen/text_22"
+                        android:textColor="#fff"
+                        android:id="@+id/workHour"
+                        android:padding="@dimen/padding_4"
+                        android:background="@drawable/bg_work_text"
+                        android:layout_width="@dimen/hour_height_width"
+                        android:layout_height="@dimen/hour_height_width"/>
+
+
+                    <ImageView
+                        android:id="@+id/inkement"
+                        android:layout_width="@dimen/ink_and_deink"
+                        android:layout_height="@dimen/ink_and_deink"
+                        android:layout_gravity="end|center_vertical"
+                        android:padding="@dimen/padding_4"
+                        android:src="@drawable/ic_add_circle"
+                        android:contentDescription="TODO" />
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:padding="@dimen/padding_4"
+                android:layout_marginTop="@dimen/margin_8"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/helpImage"
+                    app:iconTint="@color/colorBlue"
+                    android:backgroundTint="@android:color/transparent"
+                    app:icon="@drawable/ic_help_outline"
+                    app:iconGravity="end"
+                    android:maxLines="2"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:text="@string/star_text"
+                    android:textSize="@dimen/text_16"
+                    android:textColor="#474343"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    />
+<!--
+
+                <RatingBar
+                    android:visibility="gone"
+                    android:padding="@dimen/padding_4"
+                    android:id="@+id/ratingBar1"
+                    android:rating="4"
+                    style="@style/Widget.AppCompat.RatingBar"
+                    android:progressDrawable="@drawable/custom_ratingbar_selector"
+                    android:progressTint="@color/colorBlue"
+                    android:progressBackgroundTint="#863B6E97"
+                    android:secondaryProgressTint="@color/colorPrimary"
+                    android:stepSize="1.0"
+                    android:layout_gravity="center_horizontal"
+                    android:isIndicator="false"
+                    android:numStars="5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+-->
+
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                    android:id="@+id/ratingBar"
+                    android:numStars="5"
+                    android:stepSize="1.0"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:rating="4"
+                    app:mrb_progressTint="@color/colorBlue"
+                    app:mrb_progressBackgroundTint="#863B6E97"
+                    app:mrb_secondaryProgressTint="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:visibility="invisible"
+            android:background="#4A698193"
+            android:id="@+id/freamLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

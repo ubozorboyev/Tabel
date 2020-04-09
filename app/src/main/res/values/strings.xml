@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Табель</string>
+    <string name="login">Login</string>
+    <string name="password">password</string>
+    <string name="page0">Главная</string>
+    <string name="page1">Очитаться</string>
+    <string name="page2">Список</string>
+    <string name="worker_position">должность: </string>
+    <string name="phono_number">номер тел: </string>
+    
+    <string name="otprosilya">Отпросился</string>
+    <string name="boleli">Болель</string>
+    <string name="nе_prishel">Не пришел</string>
+    <string name="work_time">укажите часы работ </string>
+    <string name="star_text">Оцените\nсотрудника </string>
+
+    <string name="rating_message">
+<!--        Справка! Добавилась функция оценка работы сотрудников-->
+        1 - не справился с работой\n
+        2 - с опозданием и некачественно\n
+        3 - с опозданием, но качественно\n
+        4 - во время и качественно\n
+        5 - досрочно и качественно\n
+        По умолчанию выбрана 4.
+    </string>
+
+    <string name="rating_title">Справка! Добавилась функция оценка работы сотрудников</string>
+    <string name="select_object">Select object</string>
+    <string name="log_in">Логинь</string>
+    <string name="voyti">войты</string>
+    <string name="sign_in">Sign in</string>
+    <string name="login_in">Log in</string>
+    <string name="today_rab">Сегодня работали:</string>
+    <string name="yesterday_rab">Вчера работали:</string>
+
+
+</resources>

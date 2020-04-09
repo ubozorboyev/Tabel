@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_marginEnd="@dimen/margin_4"
+    android:layout_marginStart="@dimen/margin_4"
+    android:layout_marginTop="@dimen/margin_4"
+    app:cardCornerRadius="2dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="@dimen/padding_4"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/workerImage"
+            android:layout_width="@dimen/item_image"
+            android:layout_height="@dimen/item_image"/>
+        <!--
+            <TextView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/workerImage"
+                android:id="@+id/workerId"
+                android:textColor="#000"
+                android:textSize="@dimen/text_16"
+                android:padding="@dimen/padding_4"
+                android:text="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>-->
+
+        <LinearLayout
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/workerImage"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:maxLines="1"
+                    android:textSize="@dimen/text_16"
+                    android:textColor="#000"
+                    android:id="@+id/workerName"
+                    android:text="worker name"
+                    android:padding="@dimen/padding_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/margin_4"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:maxLines="1"
+                    android:textSize="@dimen/text_16"
+                    android:text="@string/phono_number"
+                    android:padding="@dimen/padding_4"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:autoLink = "phone"
+                    android:maxLines="1"
+                    android:textSize="@dimen/text_16"
+                    android:id="@+id/workerNumber"
+                    android:textColor="@color/colorPrimary"
+                    android:inputType="phone"
+                    android:padding="@dimen/padding_4"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/margin_4"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="@string/worker_position"
+                    android:textSize="@dimen/text_16"
+                    android:padding="@dimen/padding_4"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:maxLines="1"
+                    android:textColor="#000"
+                    android:id="@+id/workerPosition"
+                    android:textSize="@dimen/text_16"
+                    android:padding="@dimen/padding_4"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
