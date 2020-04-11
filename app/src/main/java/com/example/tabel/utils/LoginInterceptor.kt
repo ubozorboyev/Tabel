@@ -8,11 +8,11 @@ class LoginInterceptor(username:String, password:String) :Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
         val request=chain.request().newBuilder()
-//            .addHeader("Content-Type", "application/json")
+//            .addHeader("Accept", "application/json, text/plain, */*")
+            .addHeader("pushtoken",Constant.token)
+            .addHeader("userid",Constant.appId)
             .header("Authorization",credentials).build()
 
         return chain.proceed(request)
     }
-
-
 }

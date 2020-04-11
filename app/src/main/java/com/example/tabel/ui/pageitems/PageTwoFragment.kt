@@ -14,6 +14,7 @@ import com.example.tabel.dialogs.BaseInterface
 import com.example.tabel.dialogs.ChoseItemDialog
 import com.example.tabel.model.Lastadded
 import com.example.tabel.model.Object
+import com.example.tabel.model.StatusSave
 import com.example.tabel.ui.BaseFragment
 import com.example.tabel.utils.Constant
 import com.example.tabel.utils.SharedPreferense
@@ -96,15 +97,14 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
 
         viewmodel.message.observe(viewLifecycleOwner, Observer {
             dialogSweet.dismiss()
-            dialogSweet.changeAlertType(SweetAlertDialog.WARNING_TYPE)
-            dialogSweet.setCancelButton("Ok",object:SweetAlertDialog.OnSweetClickListener {
+            dialogSweet.changeAlertType(SweetAlertDialog.ERROR_TYPE)
+            dialogSweet.setConfirmButton("Ok",object:SweetAlertDialog.OnSweetClickListener {
                 override fun onClick(sweetAlertDialog: SweetAlertDialog?) {
                     sweetAlertDialog?.dismiss()
                 }
-            })
+            }).show()
             dialogSweet.setTitle(it)
         })
-
 
     }
 
@@ -113,7 +113,7 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
         val ls= mutableMapOf<String,Int>()
         var count=0
         adapter.workerList.forEach {
-            if (it.isChecked){
+            if (it.isChecked && !it.workerObName.second.equals("Select Object")){
 
                 if (it.vorkerEpsont==0){
                     ls.put("workerid[$count]",it.workName.first)
@@ -141,8 +141,6 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
 
     fun workerObseravble(){
         viewmodel.workers.observe(viewLifecycleOwner, Observer {
-            Log.d("SSSS","workerObseravble $it")
-
             dialogSweet.dismiss()
 
             val filterList=it.filter {
@@ -197,6 +195,19 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
             }).show()
         })
     }
+/*
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser){
+            try {
+                init()
+            }catch (e:IllegalStateException){
+                e.printStackTrace()
+            }
+        }
+    }
+*/
 
 }
 

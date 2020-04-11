@@ -21,8 +21,8 @@ class PageTwoViewModel :ViewModel(){
     private val _objectNames=MutableLiveData<List<Object>>()
     val  objectNames:LiveData<List<Object>> =_objectNames
 
-    private val _statusSave=MutableLiveData<List<StatusSave>>()
-    val statusSave:LiveData<List<StatusSave>> =_statusSave
+    private val _statusSave=MutableLiveData<String>()
+    val statusSave:LiveData<String> =_statusSave
 
     private val _message=MutableLiveData<String>()
     val message:LiveData<String> =_message
@@ -100,7 +100,18 @@ class PageTwoViewModel :ViewModel(){
                     if (response.isSuccessful){
 
                         if (response.body()!=null){
-                            _statusSave.value=response.body()?.status_save
+                            var saved=true
+                            val ls=response.body()!!.status_save
+
+                            ls.forEach {
+                                if (!it.status_add_db.equals("Save",true)) {
+                                    _message.value="Error"
+                                      saved=false
+                                     return@forEach
+                                }
+                            }
+                            if (saved) _statusSave.value="Saved"
+
                         }else{
                             _message.value=response.message()
                         }

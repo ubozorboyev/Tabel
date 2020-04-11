@@ -9,6 +9,8 @@ class Constant {
 
         var userName=""
         var password=""
+        var token:String=""
+        var appId:String=""
 
         internal const val maxHour=20
         internal const val minHour=8

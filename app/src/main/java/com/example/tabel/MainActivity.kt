@@ -12,8 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.tabel.network.NetworkChangeReciver
+import com.example.tabel.utils.Constant
 import com.example.tabel.utils.SharedPreferense
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.FirebaseApp
+import com.google.firebase.iid.FirebaseInstanceId
 import java.net.InetAddress
 import java.net.UnknownHostException
 import java.util.concurrent.*
@@ -27,8 +30,10 @@ class MainActivity : AppCompatActivity(),NetworkChangeReciver.NetworkListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        FirebaseApp.initializeApp(this)
         SharedPreferense.setContext(applicationContext)
 
+        firebaseListener()
         checkPermissons()
         NetworkChangeReciver.networkListener=this
         val networkChangeReciver=NetworkChangeReciver()
@@ -36,6 +41,26 @@ class MainActivity : AppCompatActivity(),NetworkChangeReciver.NetworkListener {
         registerReceiver(networkChangeReciver, IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"))
 
     }
+
+    fun firebaseListener(){
+
+
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener { task ->
+
+            if (!task.isSuccessful){
+                Log.d("FFFFF","task is not succsesful")
+            }
+            else{
+
+                Constant.token=task.result?.token!!
+                Constant.appId=task.result?.id!!
+                Log.d("FFFF","task token ${task.result?.token}")
+                Log.d("FFFF","task id ${task.result?.id}")
+            }
+
+        }
+    }
+
 
     fun checkPermissons(){
         if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.INTERNET)!= PackageManager.PERMISSION_GRANTED) {
@@ -93,6 +118,8 @@ class MainActivity : AppCompatActivity(),NetworkChangeReciver.NetworkListener {
 
     override fun isOnline(isConnected: Boolean) {
         if (isConnected){
+
+            Toast.makeText(this,"MainActivity",Toast.LENGTH_SHORT).show()
 
         }else{
             Toast.makeText(this,"Network is not connection",Toast.LENGTH_SHORT).show()
