@@ -17,7 +17,7 @@ class PageTreeAdapter :RecyclerView.Adapter<PageTreeAdapter.ViewHolder>(){
 
     inner class ViewHolder(view:View):RecyclerView.ViewHolder(view){
 
-//        val id=view.findViewById<TextView>(R.id.workerId)
+        val id=view.findViewById<TextView>(R.id.workerId)
         val name=view.findViewById<TextView>(R.id.workerName)
         val imageView=view.findViewById<ImageView>(R.id.workerImage)
         val workerPosition=view.findViewById<TextView>(R.id.workerPosition)
@@ -36,18 +36,21 @@ class PageTreeAdapter :RecyclerView.Adapter<PageTreeAdapter.ViewHolder>(){
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val worker=workerList[position]
-//        holder.id.text=worker.workerid.toString()
+        holder.id.text=worker.i.toString()
         holder.name.text=worker.workername
         holder.phonoNumber.text=worker.workertel
         holder.workerPosition.text=worker.workerposition
-        Picasso.get().load(worker.workerimg).placeholder(R.drawable.ic_account_circle)
-            .error(R.drawable.ic_account_circle).into(holder.imageView)
+        Picasso.get().load(worker.workerimg).placeholder(R.drawable.ic_person_black_24dp)
+            .error(R.drawable.ic_person_black_24dp).into(holder.imageView)
 
     }
 
-    fun setData(ls:List<Worker>){
+    fun setData(ls:List<Worker>?){
+
         workerList.clear()
-        workerList.addAll(ls)
+
+        if (ls!=null) workerList.addAll(ls)
+
         notifyDataSetChanged()
     }
 

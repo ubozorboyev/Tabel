@@ -37,4 +37,11 @@ interface ApiInterface {
     @Headers("Content-Type: application/json")
     @GET(".")
     fun getLastAdded(@Query("mod")mod: String):Call<LastAddedModel>
+
+    @Headers("Content-Type: application/json")
+    @GET(".")
+    fun getNews(@Query("mod")mod: String):Call<NewsModel>
+
+
+
 }

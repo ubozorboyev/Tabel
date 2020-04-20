@@ -23,7 +23,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/laytout"
+            android:id="@+id/loginLaytout"
             app:startIconDrawable="@drawable/ic_person_black_24dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:boxCornerRadiusBottomEnd="@dimen/login_radius"
@@ -51,6 +51,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:hint="@string/password"
+            android:id="@+id/passworLayout"
             app:counterEnabled="true"
             android:layout_marginTop="@dimen/margin_8"
             app:counterMaxLength="10"
@@ -58,7 +59,7 @@
             app:boxStrokeColor="@color/tab_color"
             app:hintTextColor="@color/tab_color"
             app:endIconMode="password_toggle"
-            app:layout_constraintTop_toBottomOf="@id/laytout"
+            app:layout_constraintTop_toBottomOf="@id/loginLaytout"
             app:boxCornerRadiusBottomEnd="@dimen/login_radius"
             app:boxCornerRadiusTopEnd="@dimen/login_radius"
             app:boxCornerRadiusBottomStart="@dimen/login_radius"

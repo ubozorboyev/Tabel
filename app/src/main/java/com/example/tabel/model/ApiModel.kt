@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class ApiModel {
 
@@ -18,6 +19,9 @@ class ApiModel {
         Log.d("TTT","login ${Constant.userName}")
 
             val clinet=OkHttpClient().newBuilder()
+                .connectTimeout(2, TimeUnit.MINUTES)
+                .writeTimeout(2, TimeUnit.MINUTES) // write timeout
+                .readTimeout(2, TimeUnit.MINUTES)
                 .addInterceptor(LoginInterceptor(Constant.userName,Constant.password))
                 .build()
 

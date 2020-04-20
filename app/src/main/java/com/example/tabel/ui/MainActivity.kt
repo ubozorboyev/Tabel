@@ -1,30 +1,27 @@
-package com.example.tabel
+package com.example.tabel.ui
 
 import android.content.DialogInterface
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.tabel.R
 import com.example.tabel.network.NetworkChangeReciver
 import com.example.tabel.utils.Constant
 import com.example.tabel.utils.SharedPreferense
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
-import java.net.InetAddress
-import java.net.UnknownHostException
-import java.util.concurrent.*
-import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity(),NetworkChangeReciver.NetworkListener {
 
     private val PERMISSION_CODE=100
+    private val networkChangeReciver=NetworkChangeReciver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,18 +29,18 @@ class MainActivity : AppCompatActivity(),NetworkChangeReciver.NetworkListener {
 
         FirebaseApp.initializeApp(this)
         SharedPreferense.setContext(applicationContext)
-
         firebaseListener()
         checkPermissons()
         NetworkChangeReciver.networkListener=this
-        val networkChangeReciver=NetworkChangeReciver()
 
         registerReceiver(networkChangeReciver, IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"))
 
     }
 
-    fun firebaseListener(){
+    
 
+
+    fun firebaseListener(){
 
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener { task ->
 
@@ -51,11 +48,8 @@ class MainActivity : AppCompatActivity(),NetworkChangeReciver.NetworkListener {
                 Log.d("FFFFF","task is not succsesful")
             }
             else{
-
                 Constant.token=task.result?.token!!
                 Constant.appId=task.result?.id!!
-                Log.d("FFFF","task token ${task.result?.token}")
-                Log.d("FFFF","task id ${task.result?.id}")
             }
 
         }
@@ -99,6 +93,7 @@ class MainActivity : AppCompatActivity(),NetworkChangeReciver.NetworkListener {
 
     }
 
+    @Suppress("NAME_SHADOWING")
     fun showAlert(){
 
         val dialog= AlertDialog.Builder(this)
@@ -118,11 +113,14 @@ class MainActivity : AppCompatActivity(),NetworkChangeReciver.NetworkListener {
 
     override fun isOnline(isConnected: Boolean) {
         if (isConnected){
-
-            Toast.makeText(this,"MainActivity",Toast.LENGTH_SHORT).show()
-
+          //  Snackbar.make(window.decorView.rootView,Constant.networkConnection,Snackbar.LENGTH_LONG).show()
         }else{
-            Toast.makeText(this,"Network is not connection",Toast.LENGTH_SHORT).show()
+            Snackbar.make(window.decorView.rootView,Constant.networkNoConnection,Snackbar.LENGTH_LONG).show()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(networkChangeReciver)
     }
 }

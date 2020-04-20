@@ -1,11 +1,13 @@
 package com.example.tabel.ui.pageitems
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.tabel.R
 import com.example.tabel.adapters.WorkSettingAdapter
@@ -20,6 +22,7 @@ import com.example.tabel.utils.Constant
 import com.example.tabel.utils.SharedPreferense
 import com.example.tabel.viewmodel.pageviewmodels.PageTwoViewModel
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.title_layout.view.*
 
 class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
 
@@ -32,40 +35,61 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        binding.appTitle.pagetite.text=getString(R.string.page1)
+
+        binding.swiperRefresh.isRefreshing=true
+
         binding.recyclerview.adapter=adapter
         obseravbleSettings()
         adapterListeners()
-        binding.fabSave.setOnClickListener {
-            postData()
-        }
-
-        viewmodel.isOnline.observe(viewLifecycleOwner, Observer {
-            if (it){
-                init()
-            }else{
-                dialogSweet.dismiss()
-                Snackbar.make(view,Constant.networkNoConnection,Snackbar.LENGTH_LONG).show()
-            }
-        })
+        dialogSweet.hideConfirmButton()
+        binding.fabSave.setOnClickListener { postData() }
+        swipeRefresh()
     }
 
-    fun init(){
+    fun swipeRefresh(){
+
+        binding.swiperRefresh.setColorSchemeResources(android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light)
+
+        binding.swiperRefresh.setOnRefreshListener {
+            adapter.setData(null)
+            binding.emptyTextView.visibility=View.INVISIBLE
+            loadData()
+        }
+    }
+
+    fun loadData(){
+        Log.d("XXXX","LoadData")
         viewmodel.loadObjectNames()
         viewmodel.loadLastAdd()
         viewmodel.getTodayAdd()
+    }
+
+    fun obseravbleSettings(){
+
         objectNamesObseravble()
         lastAddedObseravble()
         workerObseravble()
+        messageObseravble()
         statusSave()
+
+        viewmodel.isOnline.observe(viewLifecycleOwner, Observer {
+            if (it && viewmodel.workers.value.isNullOrEmpty()) loadData()
+        })
     }
 
     fun adapterListeners(){
 
         adapter.selectedListener=object:(Int)->Unit{
+
             override fun invoke(p1: Int) {
 
                 val obNames= arrayListOf<String>()
                 val keys= arrayListOf<Int>()
+
                 objectList.forEach {
                     keys.add(it.key)
                     obNames.add(it.value)
@@ -88,51 +112,59 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
         }
     }
 
-    fun obseravbleSettings(){
-
-        dialogSweet.changeAlertType(SweetAlertDialog.PROGRESS_TYPE)
-        dialogSweet.setTitleText("Loadding...")
-        dialogSweet.setCancelable(true)
-        dialogSweet.show()
+    fun messageObseravble(){
 
         viewmodel.message.observe(viewLifecycleOwner, Observer {
-            dialogSweet.dismiss()
-            dialogSweet.changeAlertType(SweetAlertDialog.ERROR_TYPE)
-            dialogSweet.setConfirmButton("Ok",object:SweetAlertDialog.OnSweetClickListener {
-                override fun onClick(sweetAlertDialog: SweetAlertDialog?) {
-                    sweetAlertDialog?.dismiss()
-                }
-            }).show()
-            dialogSweet.setTitle(it)
+            if (it!=null){
+                dialogSweet.dismiss()
+                dialogSweet.changeAlertType(SweetAlertDialog.ERROR_TYPE)
+                dialogSweet.setTitle(it)
+                dialogSweet.show()
+            }
         })
+    }
 
+    fun statusSave(){
+
+        viewmodel.statusSave.observe(viewLifecycleOwner, Observer {
+
+            if (it!=null){
+                viewmodel.getTodayAdd()
+                Log.d("XXXXXX","save status")
+
+                dialogSweet.changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
+                dialogSweet.setTitleText("Save")
+                dialogSweet.show()
+                viewmodel.loadWorker()
+            }
+        })
     }
 
     fun postData(){
 
         val ls= mutableMapOf<String,Int>()
         var count=0
-        adapter.workerList.forEach {
-            if (it.isChecked && !it.workerObName.second.equals("Select Object")){
 
-                if (it.vorkerEpsont==0){
+        adapter.workerList.forEach {
+
+            if (it.isChecked ){
+
+                if (it.vorkerEpsont==0 && !it.workerObName.second.equals("Select Object")){
                     ls.put("workerid[$count]",it.workName.first)
                     ls.put("object${it.workName.first}",it.workerObName.first)
                     ls.put("hour${it.workName.first}",it.workerHour)
                     ls.put("rating${it.workName.first}",it.workerRating)
                     count++
-                }else{
+
+                }else if (it.vorkerEpsont>0){
                     ls.put("workerid[$count]",it.workName.first)
                     ls.put("epsend${it.workName.first}",it.vorkerEpsont)
-
                 }
             }
         }
+
         if (ls.isNotEmpty()){
-            dialogSweet.setTitleText("")
-            dialogSweet.setContentText("")
-            dialogSweet.changeAlertType(SweetAlertDialog.PROGRESS_TYPE)
-            dialogSweet.show()
+            showProgress()
             viewmodel.postData(ls)
             viewmodel.loadLastAdd()
         }
@@ -140,30 +172,37 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
 
 
     fun workerObseravble(){
+
         viewmodel.workers.observe(viewLifecycleOwner, Observer {
+
             dialogSweet.dismiss()
+            binding.swiperRefresh.isRefreshing=false
+            Log.d("XXXXXXXXXXX","list worker $it")
 
-            val filterList=it.filter {
-                val worker=it
+                 val filterList=it.filter {
 
-                lastaddeds.forEach {
+                     val worker=it
 
-                    if (worker.workName.first==it.worker_id){
-                        worker.workerObName= Pair(it.objectid,objectList.get(it.objectid)?:"Select Object")
-                    }
-                }
+                     lastaddeds.forEach {
+
+                     if (worker.workName.first==it.worker_id)
+                         worker.workerObName= Pair(it.objectid,objectList.get(it.objectid)?:"Select Object")
+
+                     }
 
                 SharedPreferense.getTodayWorkers()?.contains(it.workName.second)?.not()?:true
             }
+
+            binding.emptyTextView.visibility=if (filterList.isNullOrEmpty()) View.VISIBLE else View.INVISIBLE
+
             adapter.setData(filterList)
         })
     }
 
     fun objectNamesObseravble(){
+
         viewmodel.objectNames.observe(viewLifecycleOwner, Observer {
             objectList.clear()
-            Log.d("SSSS","objectNamesObseravble $it")
-
             it.forEach { objectList.put(it.objectid,it.objectname) }
             viewmodel.loadWorker()
         })
@@ -173,44 +212,27 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
     fun lastAddedObseravble(){
 
         viewmodel.lastadded.observe(viewLifecycleOwner, Observer {
-            Log.d("SSSS","lastAddedObseravble $it")
             lastaddeds=it
         })
     }
 
-    fun statusSave(){
+    fun showProgress(){
 
-        viewmodel.statusSave.observe(viewLifecycleOwner, Observer { it ->
-
-            viewmodel.getTodayAdd()
-            dialogSweet.dismiss()
-            dialogSweet.changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
-            dialogSweet.setTitleText("Success")
-            dialogSweet.setContentText(it.toString()).setCancelable(false)
-            dialogSweet.setConfirmButton("OK",object :SweetAlertDialog.OnSweetClickListener{
-                override fun onClick(sweetAlertDialog: SweetAlertDialog?) {
-                    viewmodel.loadWorker()
-                    sweetAlertDialog?.dismiss()
-                }
-            }).show()
-        })
-    }
-/*
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser){
-            try {
-                init()
-            }catch (e:IllegalStateException){
-                e.printStackTrace()
-            }
+        if (isVisible){
+            dialogSweet.changeAlertType(SweetAlertDialog.PROGRESS_TYPE)
+            dialogSweet.setTitleText("Loadding...")
+            dialogSweet.setCancelable(true)
+            dialogSweet.show()
         }
     }
-*/
+
+
+    override fun onStop() {
+        viewmodel.clearMessageStatus()
+        super.onStop()
+    }
 
 }
-
 
 data class WorkerItemData(
     val workName:Pair<Int,String>,

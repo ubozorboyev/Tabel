@@ -1,6 +1,5 @@
 package com.example.tabel.ui
 
-import android.database.DatabaseUtils
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

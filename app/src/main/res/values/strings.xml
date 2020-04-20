@@ -2,9 +2,11 @@
     <string name="app_name">Табель</string>
     <string name="login">Login</string>
     <string name="password">password</string>
-    <string name="page0">Главная</string>
-    <string name="page1">Очитаться</string>
-    <string name="page2">Список</string>
+    <string name="page0">Главная страница</string>
+    <string name="page1">Отчитаться о проделанной работе бригады</string>
+    <string name="page2">Состав вашей бригады</string>
+    <string name="page3">Новости компании</string>
+    <string name="pustoy">Пустой</string>
     <string name="worker_position">должность: </string>
     <string name="phono_number">номер тел: </string>
     

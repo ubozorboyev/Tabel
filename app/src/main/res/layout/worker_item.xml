@@ -19,21 +19,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:padding="@dimen/padding_4"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/ic_person_black_24dp"
             android:id="@+id/workerImage"
             android:layout_width="@dimen/item_image"
             android:layout_height="@dimen/item_image"/>
-        <!--
+
             <TextView
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/workerImage"
                 android:id="@+id/workerId"
-                android:textColor="#000"
-                android:textSize="@dimen/text_16"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_14"
                 android:padding="@dimen/padding_4"
                 android:text="1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>-->
+                android:layout_height="wrap_content"/>
 
         <LinearLayout
             app:layout_constraintBottom_toBottomOf="parent"
@@ -106,7 +106,6 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:maxLines="1"
                     android:textColor="#000"
                     android:id="@+id/workerPosition"
                     android:textSize="@dimen/text_16"

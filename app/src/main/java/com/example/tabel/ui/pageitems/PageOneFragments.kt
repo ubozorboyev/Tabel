@@ -9,6 +9,8 @@ import com.example.tabel.adapters.DayAddAdpter
 import com.example.tabel.databinding.PageOneBinding
 import com.example.tabel.ui.BaseFragment
 import com.example.tabel.viewmodel.pageviewmodels.PageOneViewModel
+import kotlinx.android.synthetic.main.news_fragment.view.*
+import kotlinx.android.synthetic.main.title_layout.view.*
 
 class PageOneFragment :BaseFragment<PageOneBinding>(R.layout.page_one){
 
@@ -30,6 +32,8 @@ class PageOneFragment :BaseFragment<PageOneBinding>(R.layout.page_one){
                 viewmodel.loadYesterdayWorker()
             }
         })
+
+        binding.appTitle.pagetite.text=getString(R.string.page0)
 
     }
 

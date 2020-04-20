@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context="ui.pageitems.PageOneFragment"
@@ -10,74 +10,84 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include layout="@layout/title_layout"
+            android:id="@+id/appTitle"/>
 
-        <TextView
-            android:layout_marginTop="@dimen/margin_8"
-            android:textStyle="bold"
-            android:padding="@dimen/padding_4"
-            android:textColor="#D30C0B0B"
-            android:textSize="@dimen/text_16"
-            android:text="Отчет о рабочих"
+        <LinearLayout
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent">
 
-
-        <TextView
-            android:padding="@dimen/margin_8"
-            android:textColor="#000"
-            android:textSize="@dimen/text_14"
-            android:text="@string/today_rab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_marginTop="@dimen/margin_4"
-            android:padding="@dimen/padding_4"
-            app:strokeColor="@color/colorBlue"
-            app:strokeWidth="@dimen/stroke_width"
-            app:cardCornerRadius="@dimen/margin_4"
-            android:layout_width="match_parent"
-            android:layout_weight="0.8"
-            android:layout_height="0dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/todRecyclerview"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            <TextView
+                android:layout_marginTop="@dimen/margin_8"
+                android:textStyle="bold"
+                android:padding="@dimen/padding_4"
+                android:textColor="#D30C0B0B"
+                android:textSize="@dimen/text_16"
+                android:text="Отчет о рабочих"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:layout_marginTop="@dimen/margin_8"
-            android:padding="@dimen/margin_8"
-            android:textColor="#000"
-            android:textSize="@dimen/text_14"
-            android:text="@string/yesterday_rab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_marginTop="@dimen/margin_4"
-            android:padding="@dimen/padding_4"
-            app:strokeColor="@color/colorBlue"
-            app:strokeWidth="@dimen/stroke_width"
-            app:cardCornerRadius="@dimen/margin_4"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="0dp">
+                android:layout_height="wrap_content"/>
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/yesRecyclerview"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            <TextView
+                android:padding="@dimen/margin_8"
+                android:textColor="#000"
+                android:textSize="@dimen/text_14"
+                android:text="@string/today_rab"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </com.google.android.material.card.MaterialCardView>
+                android:layout_height="wrap_content"/>
 
 
-    </LinearLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_margin="@dimen/margin_4"
+                android:padding="@dimen/padding_4"
+                app:strokeColor="@color/colorBlue"
+                app:strokeWidth="@dimen/stroke_width"
+                app:cardCornerRadius="@dimen/margin_4"
+                android:layout_width="match_parent"
+                android:layout_weight="0.8"
+                android:layout_height="0dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/todRecyclerview"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_marginTop="@dimen/margin_8"
+                android:padding="@dimen/margin_8"
+                android:textColor="#000"
+                android:textSize="@dimen/text_14"
+                android:text="@string/yesterday_rab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_margin="@dimen/margin_4"
+                android:padding="@dimen/padding_4"
+                app:strokeColor="@color/colorBlue"
+                app:strokeWidth="@dimen/stroke_width"
+                app:cardCornerRadius="@dimen/margin_4"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/yesRecyclerview"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

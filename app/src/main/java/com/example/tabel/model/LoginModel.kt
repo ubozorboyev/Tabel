@@ -76,6 +76,7 @@ data class Hour(
     val hour: Int
 )
 
+/// Status Sava
 data class PostResponse(
     val status_auth: String,
     val status_save: List<StatusSave>,
@@ -89,6 +90,7 @@ data class StatusSave(
 )
 
 
+/// Last Add
 data class LastAddedModel(
     val lastadded: List<Lastadded>,
     val status_auth: String,
@@ -100,4 +102,20 @@ data class Lastadded(
     val hour: Int,
     val objectid: Int,
     val worker_id: Int
+)
+
+/// news
+data class NewsModel(
+    val news: List<New>,
+    val status_auth: String,
+    val userid: Int,
+    val username: String
+)
+
+data class New(
+    val date: String,
+    val i: Int,
+    val id: Int,
+    val name: String,
+    val text: String
 )

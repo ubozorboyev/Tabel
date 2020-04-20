@@ -2,6 +2,7 @@ package com.example.tabel.adapters
 
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tabel.R
 import com.example.tabel.ui.pageitems.WorkerItemData
 import com.example.tabel.utils.Constant
+import com.example.tabel.utils.setOnFinishListener
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.checkbox.MaterialCheckBox
 import me.zhanghai.android.materialratingbar.MaterialRatingBar
@@ -40,9 +42,11 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
             hour.text=worker.workerHour.toString()
             matButton.setText(worker.workerObName.second)
             workerName.isChecked=worker.isChecked
+            radioGroup.clearCheck()
             frameLayout.visibility=if (workerName.isChecked) View.VISIBLE else View.INVISIBLE
             ratingBar.setRating(worker.workerRating.toFloat())
             ratingBar.layoutParams=LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+
 
             ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
                 val rat=rating.toInt()
@@ -59,9 +63,19 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
 
 
             workerName.setOnCheckedChangeListener { buttonView, isChecked ->
-                frameLayout.visibility=if (isChecked) View.VISIBLE else View.INVISIBLE
-                worker.isChecked=isChecked
 
+                frameLayout.visibility = if (isChecked) View.VISIBLE else View.INVISIBLE
+
+                if (isChecked && worker.workerObName.second.equals("Select object",true) && worker.vorkerEpsont==0){
+                    matButton.animate().alpha(0f).scaleX(1.5f).scaleY(1.5f).setDuration(500).setOnFinishListener {
+                        matButton.alpha=1f
+                        matButton.scaleX=1f
+                        matButton.scaleY=1f
+                        workerName.isChecked=false
+                    }.start()
+                }else{
+                    worker.isChecked=isChecked
+                }
             }
 
             matButton.setOnClickListener {
@@ -83,6 +97,7 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
             }
 
             helpImage.setOnClickListener {
+
                 val dialog=AlertDialog.Builder(context)
 
                 dialog.setTitle(context.getString(R.string.rating_title))
@@ -106,10 +121,11 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
                     R.id.nе_prishel->{
                         worker.vorkerEpsont=3
                     }
-                    else->{worker.vorkerEpsont=0}
+                    else->{
+                        worker.vorkerEpsont=0
+                    }
                 }
             }
-
         }
 
         fun setHourText(count:Int){
@@ -127,16 +143,17 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)=holder.bind()
 
-    fun setData(ls:List<WorkerItemData>){
+    fun setData(ls:List<WorkerItemData>?){
+
         workerList.clear()
-        workerList.addAll(ls)
+
+        if (ls!=null) workerList.addAll(ls)
+
         notifyDataSetChanged()
     }
 
     fun animateView(view: View){
         view.alpha=0f
         view.animate().alpha(1f).setDuration(300).start()
-
     }
-
 }

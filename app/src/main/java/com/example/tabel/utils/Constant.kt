@@ -18,6 +18,7 @@ class Constant {
         val isNetworkConnection=MutableLiveData<Boolean>()
 
         internal const val networkNoConnection="Network is not connection"
+        internal const val networkConnection="Network is connection"
     }
 
 

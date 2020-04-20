@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/margin_4"
+    app:cardCornerRadius="@dimen/margin_4"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:padding="@dimen/padding_4"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <TextView
+        android:text="@string/page3"
+        android:textColor="#000"
+        android:id="@+id/newName"
+        android:padding="@dimen/padding_4"
+        android:textSize="@dimen/text_18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+
+        android:textColorLink="@color/colorBlue"
+        android:linksClickable="true"
+        android:autoLink="web"
+        android:textColor="@color/text_color"
+        android:id="@+id/newText"
+        android:padding="@dimen/padding_4"
+        android:textSize="@dimen/text_16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:textColor="@color/text_color"
+        android:text="askjnaelijbn"
+        android:id="@+id/newDate"
+        android:padding="@dimen/padding_4"
+        android:textStyle="italic"
+        android:textSize="@dimen/text_18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

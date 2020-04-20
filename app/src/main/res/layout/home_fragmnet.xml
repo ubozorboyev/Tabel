@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -14,16 +15,39 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
-                app:tabTextColor="#fff"
-                android:textAlignment="center"
-                app:tabIndicatorColor="#fff"
+                app:tabIconTint="@color/white"
+                app:tabIndicatorColor="@color/white"
                 app:tabIndicatorHeight="@dimen/margin_4"
-                app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
-                android:animateLayoutChanges="true"
+                app:tabRippleColor="@color/white"
                 android:background="@color/tab_color"
-                style="@style/Theme.MaterialComponents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+<!--
+
+                <com.google.android.material.tabs.TabItem
+                    android:icon="@drawable/page1"
+                    android:text="@string/page0"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+
+                <com.google.android.material.tabs.TabItem
+                    android:icon="@drawable/page2"
+                    android:text="@string/page1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.tabs.TabItem
+                    android:text="@string/page2"
+                    android:icon="@drawable/page3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.tabs.TabItem
+                    android:text="@string/page3"
+                    android:icon="@drawable/page4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+-->
 
             </com.google.android.material.tabs.TabLayout>
 

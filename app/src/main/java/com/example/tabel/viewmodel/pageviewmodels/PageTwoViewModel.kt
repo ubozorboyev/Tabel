@@ -100,18 +100,16 @@ class PageTwoViewModel :ViewModel(){
                     if (response.isSuccessful){
 
                         if (response.body()!=null){
-                            var saved=true
+
                             val ls=response.body()!!.status_save
 
                             ls.forEach {
                                 if (!it.status_add_db.equals("Save",true)) {
-                                    _message.value="Error"
-                                      saved=false
-                                     return@forEach
+                                    _statusSave.postValue("Saved")
+                                     return
                                 }
+                                _message.value="Error"
                             }
-                            if (saved) _statusSave.value="Saved"
-
                         }else{
                             _message.value=response.message()
                         }
@@ -160,6 +158,12 @@ class PageTwoViewModel :ViewModel(){
                 }
 
             })
+    }
+
+    fun clearMessageStatus(){
+        _statusSave.postValue(null)
+        _message.postValue(null)
+
     }
 
 }

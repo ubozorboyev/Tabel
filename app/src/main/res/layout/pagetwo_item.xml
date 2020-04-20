@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:textColor="#474343"
+                    android:textColor="@color/text_color"
                     android:gravity="center_vertical"
                     android:textSize="@dimen/text_16"
                     android:text="@string/work_time"

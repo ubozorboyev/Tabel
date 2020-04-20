@@ -2,6 +2,8 @@ package com.example.tabel.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -23,6 +25,7 @@ class LoginFragment :BaseFragment<LoginFragmentBinding>(R.layout.login_fragment)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding.loginButton.setOnClickListener(this)
+        editTextListener()
 
         viewModel.statusError.observe(viewLifecycleOwner, Observer {
             dialog.dismiss()
@@ -62,16 +65,42 @@ class LoginFragment :BaseFragment<LoginFragmentBinding>(R.layout.login_fragment)
         }
     }
 
+
+    fun editTextListener(){
+
+     binding.inputLogin.addTextChangedListener(object :TextWatcher{
+
+         override fun afterTextChanged(s: Editable?) {
+             if (!s.isNullOrEmpty()) binding.loginLaytout.isErrorEnabled=false
+         }
+
+         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+
+         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
+     })
+
+        binding.inputPassword.addTextChangedListener(object :TextWatcher{
+
+            override fun afterTextChanged(s: Editable?) {
+                if (!s.isNullOrEmpty()) binding.passworLayout.isErrorEnabled=false
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
+        })
+    }
+
     fun verification(userName:String,password:String):Boolean{
         var valid=true
 
         if (userName.isNullOrEmpty()){
-            binding.inputLogin.error="Login kiritilishi kerak"
+            binding.loginLaytout.error="Login kiritilishi kerak"
             valid=false
         }
 
         if (password.isNullOrEmpty()){
-            binding.inputPassword.error="Password kiritilishi kerak"
+            binding.passworLayout.error="Password kiritilishi kerak"
              valid=false
         }
         return valid

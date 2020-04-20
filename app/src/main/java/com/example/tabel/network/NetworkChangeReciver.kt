@@ -15,11 +15,9 @@ class NetworkChangeReciver :BroadcastReceiver(){
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        Constant.isNetworkConnection.value=isOnline(context)
-        /*
-        if (networkListener!=null){
-            networkListener!!.isOnline(isOnline(context))
-        }*/
+        val isConnected=isOnline(context)
+        Constant.isNetworkConnection.value=isConnected
+        networkListener?.isOnline(isConnected)
     }
 
     fun isOnline(context: Context?):Boolean{
