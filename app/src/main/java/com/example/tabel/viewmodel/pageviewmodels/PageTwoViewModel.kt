@@ -161,8 +161,8 @@ class PageTwoViewModel :ViewModel(){
     }
 
     fun clearMessageStatus(){
-        _statusSave.postValue(null)
-        _message.postValue(null)
+        _statusSave.value=null
+        _message.value=null
 
     }
 

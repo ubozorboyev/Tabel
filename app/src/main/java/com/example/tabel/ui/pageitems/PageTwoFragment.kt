@@ -120,6 +120,7 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
                 dialogSweet.changeAlertType(SweetAlertDialog.ERROR_TYPE)
                 dialogSweet.setTitle(it)
                 dialogSweet.show()
+                viewmodel.clearMessageStatus()
             }
         })
     }
@@ -136,6 +137,7 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
                 dialogSweet.setTitleText("Save")
                 dialogSweet.show()
                 viewmodel.loadWorker()
+                viewmodel.clearMessageStatus()
             }
         })
     }
@@ -224,12 +226,6 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
             dialogSweet.setCancelable(true)
             dialogSweet.show()
         }
-    }
-
-
-    override fun onStop() {
-        viewmodel.clearMessageStatus()
-        super.onStop()
     }
 
 }
