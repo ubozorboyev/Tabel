@@ -25,7 +25,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:clipToPadding="false"
-                android:paddingBottom="@dimen/clipToPadding"
+
                 android:id="@+id/recyclerview"
                 tools:listitem="@layout/pagetwo_item"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
