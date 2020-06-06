@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.example.tabel.utils.UncheckableRadioButton
+                <net.city.tabel.utils.UncheckableRadioButton
                     android:padding="@dimen/padding_4"
                     android:layout_gravity="center"
                     android:id="@+id/otprosilya"
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"/>
 
 
-                <com.example.tabel.utils.UncheckableRadioButton
+                <net.city.tabel.utils.UncheckableRadioButton
                     android:padding="@dimen/padding_4"
                     android:id="@+id/boleli"
                     android:text="@string/boleli"
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"/>
 
 
-                <com.example.tabel.utils.UncheckableRadioButton
+                <net.city.tabel.utils.UncheckableRadioButton
                     android:padding="@dimen/padding_4"
                     android:id="@+id/nе_prishel"
                     android:text="@string/nе_prishel"
