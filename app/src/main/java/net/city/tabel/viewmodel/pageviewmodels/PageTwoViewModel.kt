@@ -104,6 +104,7 @@ class PageTwoViewModel :ViewModel(){
 
                         if (response.body()!=null){
 
+                           // getTodayAdd()
                             val ls=response.body()!!.status_save
 
                             ls.forEach {
@@ -155,7 +156,7 @@ class PageTwoViewModel :ViewModel(){
 
                     if (response.isSuccessful){
                         if (response.body()!=null){
-                            _lastAdded.value=response.body()!!.lastadded
+                            _lastAdded.value = response.body()!!.lastadded
                         }
                     }
                 }

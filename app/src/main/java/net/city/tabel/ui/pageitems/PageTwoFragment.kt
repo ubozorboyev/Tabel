@@ -32,11 +32,11 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        binding.appTitle.pagetite.text=getString(R.string.page1)
+        binding.appTitle.pagetite.text = getString(R.string.page1)
 
-        binding.swiperRefresh.isRefreshing=true
+        binding.swiperRefresh.isRefreshing = true
 
-        binding.recyclerview.adapter=adapter
+        binding.recyclerview.adapter = adapter
         obseravbleSettings()
         adapterListeners()
         dialogSweet.hideConfirmButton()
@@ -80,7 +80,7 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
 
     fun adapterListeners(){
 
-        adapter.selectedListener=object:(Int)->Unit{
+        adapter.selectedListener = object:(Int)->Unit{
 
             override fun invoke(p1: Int) {
 
@@ -145,27 +145,31 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
         val ls= mutableMapOf<String,Int>()
         var count=0
 
+        Log.d("TTTTTTTTTT","post List ${adapter.workerList}")
+
         adapter.workerList.forEach {
 
             if (it.isChecked ){
 
-                if (it.vorkerEpsont==0 && !it.workerObName.second.equals("Select Object")){
+                if (it.vorkerEpsont == 0 /*&& !it.workerObName.second.equals("Select Object")*/){
                     ls.put("workerid[$count]",it.workName.first)
                     ls.put("object${it.workName.first}",it.workerObName.first)
                     ls.put("hour${it.workName.first}",it.workerHour)
                     ls.put("rating${it.workName.first}",it.workerRating)
-                    count++
 
-                }else if (it.vorkerEpsont>0){
+                }else if (it.vorkerEpsont > 0){
                     ls.put("workerid[$count]",it.workName.first)
                     ls.put("epsend${it.workName.first}",it.vorkerEpsont)
                 }
+                count++
             }
+
         }
 
         if (ls.isNotEmpty()){
             showProgress()
             viewmodel.postData(ls)
+            adapter.setData(null)
             viewmodel.loadLastAdd()
         }
     }
@@ -176,7 +180,7 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
         viewmodel.workers.observe(viewLifecycleOwner, Observer {
 
             dialogSweet.dismiss()
-            binding.swiperRefresh.isRefreshing=false
+            binding.swiperRefresh.isRefreshing = false
             Log.d("XXXXXXXXXXX","list worker $it")
 
                  val filterList=it.filter {
@@ -212,7 +216,7 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
     fun lastAddedObseravble(){
 
         viewmodel.lastadded.observe(viewLifecycleOwner, Observer {
-            lastaddeds=it
+            lastaddeds = it
         })
     }
 

@@ -21,7 +21,7 @@ import net.city.tabel.utils.Constant.Companion.userName
 class LoginFragment : BaseFragment<LoginFragmentBinding>(R.layout.login_fragment),View.OnClickListener{
 
     private val viewModel by viewModels<LoginViewModel>()
-    private val dialog by lazy { SweetAlertDialog(context) }
+    private var dialog:SweetAlertDialog? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -29,21 +29,21 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>(R.layout.login_fragment
         editTextListener()
 
         viewModel.statusError.observe(viewLifecycleOwner, Observer {
-            dialog.dismiss()
-            dialog.changeAlertType(SweetAlertDialog.ERROR_TYPE)
-            dialog.setTitleText(it)
-            dialog.setConfirmButton("Ok",object :SweetAlertDialog.OnSweetClickListener {
+            dialog?.dismiss()
+            dialog?.changeAlertType(SweetAlertDialog.ERROR_TYPE)
+            dialog?.setTitleText(it)
+            dialog?.setConfirmButton("Ok",object :SweetAlertDialog.OnSweetClickListener {
                 override fun onClick(sweetAlertDialog: SweetAlertDialog?) {
                     sweetAlertDialog?.dismiss()
                     binding.inputLogin.setText("")
                     binding.inputPassword.setText("")
                 }
 
-            }).show()
+            })?.show()
         })
 
         viewModel.userId.observe(viewLifecycleOwner, Observer {
-            dialog.dismiss()
+            dialog?.dismiss()
             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         })
     }
@@ -55,9 +55,11 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>(R.layout.login_fragment
                 val password=binding.inputPassword.text.toString()
 
                 if (verification(username,password)) {
-                    dialog.changeAlertType(SweetAlertDialog.PROGRESS_TYPE)
-                    dialog.setTitleText("Loadding...")
-                    dialog.show()
+                    dialog = SweetAlertDialog(requireContext())
+                    dialog?.changeAlertType(SweetAlertDialog.PROGRESS_TYPE)
+                    dialog?.setTitleText("Loadding...")
+                    dialog?.show()
+                    dialog?.setCancelable(true)
                     Constant.userName=username
                     Constant.password=password
                     viewModel.loginUser()
@@ -114,7 +116,7 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>(R.layout.login_fragment
 
         if (!login.isNullOrEmpty() && !password.isNullOrEmpty()){
 
-            dialog.dismiss()
+            dialog?.dismiss()
             Constant.userName=login
             Constant.password=password
            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)

@@ -20,8 +20,8 @@ class PageOneFragment : BaseFragment<PageOneBinding>(R.layout.page_one){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        binding.todRecyclerview.adapter=todAdapter
-        binding.yesRecyclerview.adapter=yesAdapter
+        binding.todRecyclerview.adapter = todAdapter
+        binding.yesRecyclerview.adapter = yesAdapter
 
         viewModelOperation()
 

@@ -16,9 +16,13 @@ class DayAddAdpter :RecyclerView.Adapter<DayAddAdpter.ViewHolder>(){
         val name=view.findViewById<TextView>(R.id.workername)
         val objectName=view.findViewById<TextView>(R.id.objectName)
 
-        fun bind(){
-          name.text=dayAddList[adapterPosition].workername
-          objectName.text=dayAddList[adapterPosition].objectname
+        fun bind(data: YesterdayaddedData){
+          name.text = data.workername
+          objectName.text = if (data.extend.isNullOrEmpty()){
+              data.objectname
+          }else{
+              data.extend
+          }
         }
     }
 
@@ -31,7 +35,7 @@ class DayAddAdpter :RecyclerView.Adapter<DayAddAdpter.ViewHolder>(){
 
     override fun getItemCount()=dayAddList.size
 
-    override fun onBindViewHolder(holder: DayAddAdpter.ViewHolder, position: Int)=holder.bind()
+    override fun onBindViewHolder(holder: DayAddAdpter.ViewHolder, position: Int)=holder.bind(dayAddList[position])
 
     fun setData(ls:List<YesterdayaddedData>?){
         dayAddList.clear()

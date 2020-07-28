@@ -34,32 +34,54 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
         val helpImage=view.findViewById<MaterialButton>(R.id.helpImage)
         val frameLayout=view.findViewById<FrameLayout>(R.id.freamLayout)
 
-        fun bind(){
+        init {
+            Log.d("RecyclerView","ViewHolder crered adapterposition $adapterPosition")
+        }
 
-            val worker=workerList[adapterPosition]
-            workerName.text=worker.workName.second
-            hour.text=worker.workerHour.toString()
+        fun bind(worker:WorkerItemData){
+            Log.d("RecyclerView","bind call adapterPosition $adapterPosition")
+
+            workerName.text = worker.workName.second
+            hour.text = worker.workerHour.toString()
             matButton.setText(worker.workerObName.second)
-            workerName.isChecked=worker.isChecked
-            radioGroup.clearCheck()
-            frameLayout.visibility=if (workerName.isChecked) View.VISIBLE else View.INVISIBLE
+            workerName.isChecked = worker.isChecked
+            frameLayout.visibility = if (workerName.isChecked) View.VISIBLE else View.INVISIBLE
             ratingBar.setRating(worker.workerRating.toFloat())
-            ratingBar.layoutParams=LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+            ratingBar.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
 
 
-            ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
-                val rat=rating.toInt()
-                Log.d("RATING","rating $rat")
-                when(rat){
-                    0->ratingBar.setRating(1f)
-                    1->{ worker.workerRating=rat}
-                    2->{ worker.workerRating=rat}
-                    3->{ worker.workerRating=rat}
-                    4->{ worker.workerRating=rat}
-                    5->{ worker.workerRating=rat}
+            when(worker.vorkerEpsont){
+                1 -> {
+                    radioGroup.check(R.id.otprosilya)
+                }
+                2 ->{
+                    radioGroup.check(R.id.boleli)
+                }
+                3 -> {
+                    radioGroup.check(R.id.nе_prishel)
+                }
+                0 ->{
+                    radioGroup.clearCheck()
                 }
             }
 
+            ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+                val rat=rating.toInt()
+                when(rat){
+                    0 -> ratingBar.setRating(1f)
+                    1 -> { worker.workerRating = rat }
+                    2 -> { worker.workerRating = rat }
+                    3 -> { worker.workerRating = rat }
+                    4 -> { worker.workerRating = rat }
+                    5 -> { worker.workerRating = rat }
+                }
+            }
+
+
+            fun isSelectObject():Boolean{
+
+                return true
+            }
 
             workerName.setOnCheckedChangeListener { buttonView, isChecked ->
 
@@ -67,13 +89,13 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
 
                 if (isChecked && worker.workerObName.second.equals("Select object",true) && worker.vorkerEpsont==0){
                     matButton.animate().alpha(0f).scaleX(1.5f).scaleY(1.5f).setDuration(500).setOnFinishListener {
-                        matButton.alpha=1f
-                        matButton.scaleX=1f
-                        matButton.scaleY=1f
-                        workerName.isChecked=false
+                        matButton.alpha  = 1f
+                        matButton.scaleX = 1f
+                        matButton.scaleY = 1f
+                        workerName.isChecked = false
                     }.start()
                 }else{
-                    worker.isChecked=isChecked
+                    worker.isChecked = isChecked
                 }
             }
 
@@ -110,37 +132,55 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
 
             radioGroup.setOnCheckedChangeListener { group, checkedId ->
 
+                Log.d("TTTT","checkedId $checkedId")
+                Log.d("TTTT","otprosilya ${R.id.otprosilya}")
+                Log.d("TTTT","boleli ${R.id.boleli}")
+                Log.d("TTTT","nе_prishel ${R.id.nе_prishel}")
+
+
                 when(checkedId){
                     R.id.otprosilya->{
-                        worker.vorkerEpsont=1
+                        worker.vorkerEpsont = 1
                     }
                     R.id.boleli->{
-                        worker.vorkerEpsont=2
+                        worker.vorkerEpsont = 2
                     }
                     R.id.nе_prishel->{
-                        worker.vorkerEpsont=3
+                        worker.vorkerEpsont = 3
                     }
                     else->{
-                        worker.vorkerEpsont=0
+                        worker.vorkerEpsont = 0
                     }
                 }
             }
         }
 
         fun setHourText(count:Int){
-            hour.text=count.toString()
+            hour.text = count.toString()
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkSettingAdapter.ViewHolder {
         val inflater=LayoutInflater.from(parent.context)
         val view=inflater.inflate(R.layout.pagetwo_item,parent,false)
+
+        Log.d("RecyclerView", "onCreateViewHolder: ")
+
         return ViewHolder(view)
     }
 
-    override fun getItemCount()=workerList.size
+    override fun getItemCount()= workerList.size
 
-    override fun onBindViewHolder(holder: WorkSettingAdapter.ViewHolder, position: Int)=holder.bind()
+    override fun onBindViewHolder(holder: WorkSettingAdapter.ViewHolder, position: Int){
+
+        Log.d("RecyclerView", "onBindViewHolder: position :$position")
+
+        holder.workerName.setOnCheckedChangeListener(null)
+        holder.ratingBar.setOnRatingBarChangeListener(null)
+        holder.radioGroup.setOnCheckedChangeListener(null)
+        holder.bind(workerList[position])
+
+    }
 
     fun setData(ls:List<WorkerItemData>?){
 
@@ -152,7 +192,7 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
     }
 
     fun animateView(view: View){
-        view.alpha=0f
+        view.alpha = 0f
         view.animate().alpha(1f).setDuration(300).start()
     }
 }
