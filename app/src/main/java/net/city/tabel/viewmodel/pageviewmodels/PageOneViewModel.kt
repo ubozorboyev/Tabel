@@ -36,7 +36,7 @@ class PageOneViewModel :ViewModel(){
                 override fun onResponse(call: Call<ToDayAddModel>, response: Response<ToDayAddModel>) {
 
                     if (response.isSuccessful){
-                        Log.d("TTTT","TODAY RESPONSE ${response.body()}")
+                        Log.d("TODAY","TODAY RESPONSE ${response.body()}")
                         if (response.body()!=null){
                            _todayList.value=response.body()!!.todayadded
 

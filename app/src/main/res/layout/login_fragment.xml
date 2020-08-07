@@ -15,6 +15,7 @@
             android:textAllCaps="false"
             android:padding="@dimen/margin_16"
             android:textStyle="bold"
+            android:fontFamily="@font/nunito_semibold"
             android:textSize="@dimen/text_22"
             android:textColor="@color/colorBlue"
             android:gravity="center"
@@ -41,6 +42,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputLogin"
                 android:maxLines="1"
+                android:fontFamily="@font/nunito_regular"
                 android:inputType="text"
                 android:textSize="@dimen/text_16"
                 android:layout_width="match_parent"
@@ -71,6 +73,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputPassword"
                 android:textSize="@dimen/text_16"
+                android:fontFamily="@font/nunito_regular"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -86,6 +89,7 @@
             android:paddingStart="@dimen/margin_16"
             android:paddingEnd="@dimen/margin_16"
             android:paddingTop="@dimen/margin_8"
+            android:fontFamily="@font/nunito_semibold"
             android:paddingBottom="@dimen/margin_8"
             android:backgroundTint="@color/colorBlue"
             android:text="@string/login_in"

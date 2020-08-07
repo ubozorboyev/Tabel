@@ -25,6 +25,7 @@
                 android:visibility="gone"
                 android:textSize="@dimen/text_22"
                 android:gravity="center"
+                android:fontFamily="@font/nunito_semibold"
                 android:text="working list"
                 android:id="@+id/workerTitle"
                 app:layout_constraintTop_toTopOf="parent"

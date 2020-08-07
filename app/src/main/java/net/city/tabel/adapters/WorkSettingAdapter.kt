@@ -16,30 +16,29 @@ import com.google.android.material.checkbox.MaterialCheckBox
 import me.zhanghai.android.materialratingbar.MaterialRatingBar
 import net.city.tabel.R
 import net.city.tabel.utils.setOnFinishListener
+import worker8.com.github.radiogroupplus.RadioGroupPlus
 
 class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSettingAdapter.ViewHolder>(){
 
      val workerList= arrayListOf<WorkerItemData>()
      var selectedListener:((Int)->Unit)?=null
 
+    private  val TAG = "WorkSettingAdapter"
+
     inner class ViewHolder(val view: View):RecyclerView.ViewHolder(view){
 
-        val workerName=view.findViewById<MaterialCheckBox>(R.id.workerName)
-        val matButton=view.findViewById<MaterialButton>(R.id.workerObjectName)
-        val hour=view.findViewById<TextView>(R.id.workHour)
-        val ratingBar=view.findViewById<MaterialRatingBar>(R.id.ratingBar)
-        val radioGroup=view.findViewById<RadioGroup>(R.id.radioGroup)
-        val inkrement=view.findViewById<ImageView>(R.id.inkement)
-        val deInkrement=view.findViewById<ImageView>(R.id.deInkement)
-        val helpImage=view.findViewById<MaterialButton>(R.id.helpImage)
-        val frameLayout=view.findViewById<FrameLayout>(R.id.freamLayout)
+        val workerName = view.findViewById<MaterialCheckBox>(R.id.workerName)
+        val matButton = view.findViewById<MaterialButton>(R.id.workerObjectName)
+        val hour = view.findViewById<TextView>(R.id.workHour)
+        val ratingBar = view.findViewById<MaterialRatingBar>(R.id.ratingBar)
+        val radioGroup1 = view.findViewById<RadioGroupPlus>(R.id.radioGroup1)
+        val inkrement = view.findViewById<ImageView>(R.id.inkement)
+        val deInkrement = view.findViewById<ImageView>(R.id.deInkement)
+        val helpImage = view.findViewById<MaterialButton>(R.id.helpImage)
+        val frameLayout = view.findViewById<FrameLayout>(R.id.freamLayout)
 
-        init {
-            Log.d("RecyclerView","ViewHolder crered adapterposition $adapterPosition")
-        }
 
         fun bind(worker:WorkerItemData){
-            Log.d("RecyclerView","bind call adapterPosition $adapterPosition")
 
             workerName.text = worker.workName.second
             hour.text = worker.workerHour.toString()
@@ -49,19 +48,21 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
             ratingBar.setRating(worker.workerRating.toFloat())
             ratingBar.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
 
-
             when(worker.vorkerEpsont){
                 1 -> {
-                    radioGroup.check(R.id.otprosilya)
+                    radioGroup1.check(R.id.otprosilya)
                 }
                 2 ->{
-                    radioGroup.check(R.id.boleli)
+                    radioGroup1.check(R.id.boleli)
                 }
                 3 -> {
-                    radioGroup.check(R.id.nе_prishel)
+                    radioGroup1.check(R.id.nе_prishel)
+                }
+                4 -> {
+                    radioGroup1.check(R.id.karantine)
                 }
                 0 ->{
-                    radioGroup.clearCheck()
+                    radioGroup1.clearCheck()
                 }
             }
 
@@ -77,11 +78,6 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
                 }
             }
 
-
-            fun isSelectObject():Boolean{
-
-                return true
-            }
 
             workerName.setOnCheckedChangeListener { buttonView, isChecked ->
 
@@ -104,14 +100,14 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
             }
 
             inkrement.setOnClickListener {
-                if (worker.workerHour< Constant.maxHour){
+                if (worker.workerHour < Constant.maxHour){
                     animateView(it)
                     setHourText(++worker.workerHour)
                 }
             }
 
             deInkrement.setOnClickListener {
-             if (worker.workerHour> Constant.minHour) {
+             if (worker.workerHour > Constant.minHour) {
                  animateView(it)
                  setHourText(--worker.workerHour)
              }
@@ -130,23 +126,20 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
                 }).create().show()
             }
 
-            radioGroup.setOnCheckedChangeListener { group, checkedId ->
-
-                Log.d("TTTT","checkedId $checkedId")
-                Log.d("TTTT","otprosilya ${R.id.otprosilya}")
-                Log.d("TTTT","boleli ${R.id.boleli}")
-                Log.d("TTTT","nе_prishel ${R.id.nе_prishel}")
-
+            radioGroup1.setOnCheckedChangeListener { group, checkedId ->
 
                 when(checkedId){
-                    R.id.otprosilya->{
+                    R.id.otprosilya -> {
                         worker.vorkerEpsont = 1
                     }
-                    R.id.boleli->{
+                    R.id.boleli -> {
                         worker.vorkerEpsont = 2
                     }
-                    R.id.nе_prishel->{
+                    R.id.nе_prishel -> {
                         worker.vorkerEpsont = 3
+                    }
+                    R.id.karantine -> {
+                        worker.vorkerEpsont = 4
                     }
                     else->{
                         worker.vorkerEpsont = 0
@@ -164,7 +157,6 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
         val inflater=LayoutInflater.from(parent.context)
         val view=inflater.inflate(R.layout.pagetwo_item,parent,false)
 
-        Log.d("RecyclerView", "onCreateViewHolder: ")
 
         return ViewHolder(view)
     }
@@ -173,11 +165,9 @@ class WorkSettingAdapter(val context: Context) :RecyclerView.Adapter<WorkSetting
 
     override fun onBindViewHolder(holder: WorkSettingAdapter.ViewHolder, position: Int){
 
-        Log.d("RecyclerView", "onBindViewHolder: position :$position")
-
         holder.workerName.setOnCheckedChangeListener(null)
         holder.ratingBar.setOnRatingBarChangeListener(null)
-        holder.radioGroup.setOnCheckedChangeListener(null)
+        holder.radioGroup1.setOnCheckedChangeListener(null)
         holder.bind(workerList[position])
 
     }

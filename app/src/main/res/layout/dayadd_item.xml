@@ -16,6 +16,7 @@
             android:textColor="#000"
             android:id="@+id/workername"
             android:textStyle="bold"
+            android:fontFamily="@font/nunito_regular"
             android:padding="@dimen/padding_4"
             android:textSize="@dimen/text_16"
             android:layout_width="match_parent"
@@ -25,6 +26,7 @@
             android:textColor="#000"
             android:id="@+id/objectName"
             android:padding="@dimen/padding_4"
+            android:fontFamily="@font/nunito_regular"
             android:textSize="@dimen/text_14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

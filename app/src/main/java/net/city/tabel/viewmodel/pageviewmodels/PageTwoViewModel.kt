@@ -127,6 +127,7 @@ class PageTwoViewModel :ViewModel(){
     }
 
     fun getTodayAdd(){
+
         apiModel.getAPi().loadTodayWorker(mod="gettodayadded").enqueue(object :Callback<ToDayAddModel>{
             override fun onFailure(call: Call<ToDayAddModel>, t: Throwable) {
               t.printStackTrace()

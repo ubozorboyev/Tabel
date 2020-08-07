@@ -145,11 +145,11 @@ class PageTwoFragment :BaseFragment<PageTwoBinding>(R.layout.page_two){
         val ls= mutableMapOf<String,Int>()
         var count=0
 
-        Log.d("TTTTTTTTTT","post List ${adapter.workerList}")
 
         adapter.workerList.forEach {
 
             if (it.isChecked ){
+                Log.d("TTTTTTTTTT","post List ${it}")
 
                 if (it.vorkerEpsont == 0 /*&& !it.workerObName.second.equals("Select Object")*/){
                     ls.put("workerid[$count]",it.workName.first)

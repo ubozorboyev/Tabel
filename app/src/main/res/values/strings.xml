@@ -34,6 +34,7 @@
     <string name="login_in">Log in</string>
     <string name="today_rab">Сегодня работали:</string>
     <string name="yesterday_rab">Вчера работали:</string>
+    <string name="karantine">На карантине</string>
 
 
 </resources>

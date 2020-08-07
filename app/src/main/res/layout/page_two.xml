@@ -41,6 +41,7 @@
             android:visibility="invisible"
             android:gravity="center"
             android:text="@string/pustoy"
+            android:fontFamily="@font/nunito_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="@dimen/text_22"

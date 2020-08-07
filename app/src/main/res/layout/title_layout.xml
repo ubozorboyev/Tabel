@@ -20,6 +20,7 @@
             android:textColor="#000"
             android:id="@+id/pagetite"
             android:text="@string/page3"
+            android:fontFamily="@font/nunito_regular"
             android:gravity="center"
             android:padding="@dimen/margin_8"
             android:textSize="@dimen/text_18"

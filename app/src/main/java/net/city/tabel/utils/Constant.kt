@@ -12,13 +12,13 @@ class Constant {
         var token:String=""
         var appId:String=""
 
-        internal const val maxHour=20
-        internal const val minHour=8
+        internal const val maxHour = 20
+        internal const val minHour = 1
 
         val isNetworkConnection=MutableLiveData<Boolean>()
 
-        internal const val networkNoConnection="Network is not connection"
-        internal const val networkConnection="Network is connection"
+        internal const val networkNoConnection = "Network is not connection"
+        internal const val networkConnection = "Network is connection"
     }
 
 

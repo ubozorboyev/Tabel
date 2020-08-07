@@ -21,8 +21,11 @@
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/workerName"
                 app:backgroundTint="@color/colorBlue"
-                android:textSize="@dimen/text_16"
+                android:textSize="@dimen/text_18"
                 android:padding="@dimen/padding_4"
+                android:maxLines="1"
+                android:fontFamily="@font/nunito_semibold"
+                android:ellipsize="end"
                 app:useMaterialThemeColors="true"
                 android:text="@string/star_text"
                 android:layout_width="match_parent"
@@ -31,8 +34,9 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/workerObjectName"
                 android:text="@string/select_object"
+                android:fontFamily="@font/nunito_regular"
                 app:iconTint="@android:color/black"
-                android:textSize="@dimen/text_16"
+                android:textSize="@dimen/text_18"
                 app:iconGravity="end"
                 android:paddingStart="@dimen/padding_4"
                 android:gravity="center_vertical"
@@ -45,39 +49,68 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <RadioGroup
+            <worker8.com.github.radiogroupplus.RadioGroupPlus
                 android:layout_marginTop="@dimen/margin_8"
                 android:padding="@dimen/padding_4"
-                android:id="@+id/radioGroup"
-                android:orientation="horizontal"
+                android:id="@+id/radioGroup1"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <net.city.tabel.utils.UncheckableRadioButton
-                    android:padding="@dimen/padding_4"
-                    android:layout_gravity="center"
-                    android:id="@+id/otprosilya"
-                    android:text="@string/otprosilya"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
 
-                <net.city.tabel.utils.UncheckableRadioButton
-                    android:padding="@dimen/padding_4"
-                    android:id="@+id/boleli"
-                    android:text="@string/boleli"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    <net.city.tabel.utils.UncheckableRadioButton
+                        android:id="@+id/otprosilya"
+                        android:text="@string/otprosilya"
+                        android:fontFamily="@font/nunito_regular"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:textSize="@dimen/text_14"
+                        android:layout_height="wrap_content"/>
 
 
-                <net.city.tabel.utils.UncheckableRadioButton
-                    android:padding="@dimen/padding_4"
-                    android:id="@+id/nе_prishel"
-                    android:text="@string/nе_prishel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    <net.city.tabel.utils.UncheckableRadioButton
+                        android:id="@+id/boleli"
+                        android:text="@string/boleli"
+                        android:textSize="@dimen/text_14"
+                        android:fontFamily="@font/nunito_regular"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
 
-            </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <net.city.tabel.utils.UncheckableRadioButton
+                        android:id="@+id/nе_prishel"
+                        android:text="@string/nе_prishel"
+                        android:textSize="@dimen/text_14"
+                        android:fontFamily="@font/nunito_regular"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                    <net.city.tabel.utils.UncheckableRadioButton
+                        android:id="@+id/karantine"
+                        android:fontFamily="@font/nunito_regular"
+                        android:text="@string/karantine"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/text_14"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+
+            </worker8.com.github.radiogroupplus.RadioGroupPlus>
 
             <LinearLayout
                 android:layout_marginTop="@dimen/margin_8"
@@ -90,6 +123,7 @@
                     android:textColor="@color/text_color"
                     android:gravity="center_vertical"
                     android:textSize="@dimen/text_16"
+                    android:fontFamily="@font/nunito_regular"
                     android:text="@string/work_time"
                     android:padding="@dimen/padding_4"
                     android:layout_weight="1"
@@ -117,6 +151,7 @@
                         android:text="4"
                         android:gravity="center"
                         android:textSize="@dimen/text_22"
+                        android:fontFamily="@font/nunito_regular"
                         android:textColor="#fff"
                         android:id="@+id/workHour"
                         android:padding="@dimen/padding_4"
@@ -153,7 +188,7 @@
                     android:backgroundTint="@android:color/transparent"
                     app:icon="@drawable/ic_help_outline"
                     app:iconGravity="end"
-                    android:maxLines="2"
+                    android:fontFamily="@font/nunito_regular"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:text="@string/star_text"
@@ -162,25 +197,6 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     />
-<!--
-
-                <RatingBar
-                    android:visibility="gone"
-                    android:padding="@dimen/padding_4"
-                    android:id="@+id/ratingBar1"
-                    android:rating="4"
-                    style="@style/Widget.AppCompat.RatingBar"
-                    android:progressDrawable="@drawable/custom_ratingbar_selector"
-                    android:progressTint="@color/colorBlue"
-                    android:progressBackgroundTint="#863B6E97"
-                    android:secondaryProgressTint="@color/colorPrimary"
-                    android:stepSize="1.0"
-                    android:layout_gravity="center_horizontal"
-                    android:isIndicator="false"
-                    android:numStars="5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
--->
 
                 <me.zhanghai.android.materialratingbar.MaterialRatingBar
                     android:id="@+id/ratingBar"

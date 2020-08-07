@@ -18,6 +18,7 @@
     <TextView
         android:text="@string/page3"
         android:textColor="#000"
+        android:fontFamily="@font/nunito_semibold"
         android:id="@+id/newName"
         android:padding="@dimen/padding_4"
         android:textSize="@dimen/text_18"
@@ -32,6 +33,7 @@
         android:autoLink="web"
         android:textColor="@color/text_color"
         android:id="@+id/newText"
+        android:fontFamily="@font/nunito_regular"
         android:padding="@dimen/padding_4"
         android:textSize="@dimen/text_16"
         android:layout_width="match_parent"
@@ -42,6 +44,7 @@
         android:textColor="@color/text_color"
         android:text="askjnaelijbn"
         android:id="@+id/newDate"
+        android:fontFamily="@font/nunito_regular"
         android:padding="@dimen/padding_4"
         android:textStyle="italic"
         android:textSize="@dimen/text_18"
